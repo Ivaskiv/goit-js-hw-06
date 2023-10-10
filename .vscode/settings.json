@@ -1,0 +1,7 @@
+{
+ "commentTranslate.targetLanguage": "uk",
+ "commentTranslate.hover.concise": true,
+ "commentTranslate.hover.enabled": false,
+ "commentTranslate.hover.content": false,
+ "commentTranslate.hover.nearShow": false
+}
