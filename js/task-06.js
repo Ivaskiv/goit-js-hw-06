@@ -1,5 +1,4 @@
 //! Напиши скрипт, який під час втрати фокусу на інпуті (подія blur), перевіряє його вміст щодо правильної кількості введених символів.
-
 //! Яка кількість символів повинна бути в інпуті, зазначається в його атрибуті data-length.
 //! Якщо введена правильна кількість символів, то border інпуту стає зеленим, якщо неправильна кількість - червоним.
 //! Для додавання стилів використовуй CSS-класи valid і invalid, які ми вже додали у вихідні файли завдання.
@@ -21,30 +20,17 @@
 // #validation-input.invalid {
 //   border-color: #f44336;
 // }
-
-//? 1. Отримуємо елемент інпуту за допомогою document.getElementById
 const validationInput = document.getElementById('validation-input');
-//? 2. Додаємо слухача події blur, який спрацьовує, коли інпут втрачає фокус
-validationInput.addEventListener('blur', function () {
- //? 3. Отримуємо очікувану довжину символів з атрибута data-length
- const inputLength = parseInt(validationInput.getAttribute('data-length'), 10);
- //? і поточну довжину введеного тексту
- const inputValue = validationInput.value.length;
 
- //? 4. Перевіряємо, чи довжина введеного тексту співпадає з очікуваною довжиною і додаємо відповідний клас для стилізації інпуту (введена правильна кількість символів - border інпуту стає зеленим, якщо неправильна кількість - червоним)
- if (inputValue === inputLength) {
-  // Видаляємо клас 'invalid', якщо введена довжина правильна
-  // Додаємо клас 'valid' 
-  validationInput.classList.remove('invalid');
-  validationInput.classList.add('valid');
- } else {
-  // Видаляємо клас 'valid', якщо введена довжина правильна
-  // Додаємо клас 'invalid' 
-  validationInput.classList.remove('valid');
-  validationInput.classList.add('invalid');
- }
+validationInput.addEventListener('blur', () => {
+  const expectedLength = parseInt(validationInput.getAttribute('data-length'), 10); //цей рядок коду бере значення атрибута data-length з елемента validationInput і перетворює його в число (за допомогою parseInt)
+
+  validationInput.classList.toggle('valid', validationInput.value.length === expectedLength); // метод classList.toggle для додавання або видалення класу "valid" в залежності від умови, яка перевіряється
+  validationInput.classList.toggle('invalid', validationInput.value.length !== expectedLength);
 });
 
+
+// цей код працює так: додає обробник події "blur" до елемента з ідентифікатором "validation-input", який під час втрати фокусу перевіряє, чи кількість символів у введеному тексті співпадає з очікуваною кількістю та додає або видаляє класи "valid" та "invalid" для стилізації поля вводу...
 //! ТЕОРІЯ
 // Подія focus викликається в момент фокусування, а подія blur – коли елемент втрачає фокус
 // https://uk.javascript.info/focus-blur
@@ -55,4 +41,4 @@ validationInput.addEventListener('blur', function () {
 
 // Подія click, натомість, виникає, коли користувач клікає лівою кнопкою миші на елементі. Ця подія зазвичай використовується для відстеження кліків миші на кнопках, посиланнях або інших елементах сторінки.
 
-// Отже, вони різні за своєю природою: focus відстежує активність вводу, а click відстежує кліки миші.
+// Отже, !!!focus відстежує активність вводу, а click відстежує кліки миші.

@@ -19,18 +19,18 @@ const images = [
   },
 ];
 
-//* Для створення галереї зображень на основі масиву даних, потрібно: 
-//* 1. спочатку створити масив з посиланнями на зображення (вже створений images), отримати посилання на список
+
 const galleryList = document.querySelector('ul.gallery');
+const listItemHTML = images.map((image) => 
+        `<li>
+        <img src = '${image.url}' alt = '${image.alt}'>
+        </li>`).join('');
+galleryList.insertAdjacentHTML('beforeend', listItemHTML);
 
-//* 2. потім, ітеруючи images, створити рядок з HTML-розміткою для кожного зображення 
-images.forEach((image) => {
-  const listItemHTML =
-  `<li>
-    <img src = '${image.url}' alt = '${image.alt}'>
-  </li>`;
-  //* 3. і додати їх до списку ul.gallery
-  galleryList.insertAdjacentHTML('beforeend', listItemHTML)
-});
+// elem.insertAdjacentHTML(position, string);
 
-
+// Аргумент position - це рядок, позиція щодо елемента elem. Приймає одне з чотирьох значень.
+// "beforebegin" - перед elem
+// "afterbegin" - всередині elem, перед усіма дітьми
+// "beforeend" - всередині elem, після усіх дітей
+// "afterend" - після elem

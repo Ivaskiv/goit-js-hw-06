@@ -20,9 +20,48 @@
 // }
 //! Створи функцію destroyBoxes(), яка очищає вміст div#boxes, у такий спосіб видаляючи всі створені елементи.
 
-//! ПОКРОКОВИЙ ПЛАН
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
+}
+const input = document.querySelector('input[type="number"]');
+const createBtn = document.querySelector('button[data-create]');
+const destroyBtn = document.querySelector('button[data-destroy]');
+const box = document.querySelector('#boxes');
+//!!!!!!! не починати з нуля,а продовжувати будувати блоки!!!!!!!!!!!!!!!!!!!!!
+const boxesArray = [];
+
+function createBoxes(amount) {
+  const boxSize = 30;
+  const step = 10;
+
+  const newBoxes = Array.from({ length: amount }).map((_, i) => {
+    const newBox = document.createElement('div');
+    newBox.style.width = `${boxSize+1 + (boxesArray.length + i) * step}px`;
+    newBox.style.height = `${boxSize+1 + (boxesArray.length + i) * step}px`;
+    newBox.style.backgroundColor = getRandomHexColor();
+    boxesArray.push(newBox);
+    return newBox;
+  });
+
+  box.append(...newBoxes);
+ }
+const destroyBoxes = () => {
+  box.innerHTML = '';
+};
+
+createBtn.addEventListener('click', () => {
+  createBoxes(input.value);
+});
+destroyBtn.addEventListener('click', destroyBoxes);
+
+
+
+
+//! ПЛАН
 // 1. Отримати посилання на елементи: input, кнопки "Create" (за допомогою атрибута data-create) та "Destroy" (за допомогою атрибута data-destroy), контейнер для створення елементів (div#boxes)
-// 2. Додати обробники подій для кнопок "Create" та "Destroy". При кліку на кнопку "Create", виконуватиметься функція createBoxes, а при кліку на кнопку "Destroy", виконуватиметься функція destroyBoxes
+// 2. Додати обробники подій для кнопок "Create" та "Destroy". 
 // 3. Реалізувати функцію createBoxes(amount):
       //* Отримати посилання на контейнер для створення елементів (div#boxes)
       //* Використати цикл для створення amount елементів <div>
@@ -33,47 +72,3 @@
 // 4. Реалізувати функцію destroyBoxes():
       //* Отримати посилання на контейнер для створення елементів (div#boxes)
       //* Очистити всі елементи в цьому контейнері, встановивши його вміст в порожній рядок
-
-function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215)
-    .toString(16)
-    .padStart(6, 0)}`;
-}
-const input = document.querySelector('input[type="number"]');
-const createBtn = document.querySelector('button[data-create]');
-const destroyBtn = document.querySelector('button[data-destroy]');
-const box = document.querySelector('#boxes');
-const boxesArray = [];
-
-function createBoxes(amount) {
-  const boxSize = 30;
-  const step = 10;
-  const boxes = [];
-  for (let i = 0; i < amount; i += 1){
-    const newBox = document.createElement('div');
-    newBox.style.width = `${boxSize + i * step}px`;
-    newBox.style.height = `${boxSize + i * step}px`;
-    newBox.style.backgroundColor = getRandomHexColor();
-    boxes.push(newBox);
-  }
-  boxesArray.push(...boxes);
-  box.append(...boxes);
-}
-function destroyBoxes() {
-  box.innerHTML = '';
-  boxesArray.length = 0;
-  
-}
-createBtn.addEventListener('click', () => {
-  const amount = input.value;
-  createBoxes(amount);
-});
-destroyBtn.addEventListener('click', destroyBoxes);
-
-//! ТЕОРІЯ
-//? зазвичай спочатку використов. querySelector, щоб знайти потрібні елементи, а потім використов. addEventListener, щоб додати до них обробники подій і визначити поведінку відповідно до подій користувача
-
-//? Метод append() використовується для додавання одного чи декількох елементів (які можуть бути HTML-елементами, текстовими рядками або іншими DOM-вузлами) до вказаного батьківського DOM-вузла. Цей метод дозволяє вставляти декілька дітей одночасно.
-
-// Синтаксис методу append():
-// parentElement.append(child1, child2, ...);

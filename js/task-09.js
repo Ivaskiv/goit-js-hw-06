@@ -25,9 +25,7 @@ const body = document.body;
       }
 
 buttonChangeColor.addEventListener('click', function () {
-  const randomColor = getRandomHexColor();
-  body.style.backgroundColor = randomColor;
-  spanColor.textContent = randomColor;
+  body.style.backgroundColor=spanColor.textContent = getRandomHexColor();
 });
 
 //! ТЕОРІЯ

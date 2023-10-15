@@ -16,49 +16,19 @@
 //   </label>
 //   <button type="submit">Login</button>
 // </form>
+//конспект!!!!!!!
 
 const form = document.querySelector('.login-form');
 
   form.addEventListener('submit', function (event) {
-   //заборонити стандартну відправку форми
-   event.preventDefault();
-   //перевірити чи всі поля заповнені
-   for (let i = 0; i < form.elements.length - 1; i += 1) {
-    if (!form.elements[i].value) {
-     alert('Всі поля повинні бути заповнені');
-     return;
+    event.preventDefault();//заборонити стандартну відправку форми
+    const form = event.target;// Отримуємо посилання на форму
+    const email = form.elements.email.value;// Отримуємо значення поля 'email'
+    const password = form.elements.password.value;// Отримуємо значення поля 'password'
+    
+    if (email === "" || password === "") {
+      alert('Всі поля повинні бути заповнені');
     }
-   }
-   //створити обєкт для збереження даних
-   const formData = {};
-   //за допомогою form.elements, перевірити, якщо елемент має атрибут name, то додати пару ключ-значення до створеного об'єкта
-   for (let i = 0; i < form.elements.length - 1; i += 1) {
-    if (form.elements[i].name) {
-     formData[form.elements[i].name] = form.elements[i].value;
-    }
-   }
-   console.log(formData);
-   form.reset();
+    console.log(`email: ${email}, password: ${password}`);
+    form.reset();
   });
-
-
-//! ПОКРОКОВИЙ ПЛАН
-// 1. Отримати посилання на елемент форми з класом login-form
-// 2. Додати слухача події submit до форми, який буде викликаний при натисканні кнопки "Login" та відправці форми
-// 3. У функції обробки події submit перевірити чи всі поля заповнені,якщо хоча б одне поле не заповнене (значення поля пусте), вивести  alert
-// 4. Якщо всі поля заповнені, створити порожній об'єкт
-// 5. Використовуючи цикл, перейти по всіх елементах форми (полях вводу) за допомогою form.elements, перевірити, якщо елемент має атрибут name, то додати пару ключ-значення до створеного об'єкта
-// 6. Після збору всіх даних в об'єкті, вивести цей об'єкт в консоль 
-// 7. Очистити значення полів форми за допомогою методу reset() 
-
-//! ТЕОРІЯ
-
-// querySelector - це метод JavaScript, який використовується для пошуку і вибору першого елемента в HTML-документі, який відповідає вказаному CSS селектору. Цей метод приймає рядок, який представляє собою CSS селектор, і повертає перший елемент, що збігається з цим селектором. Якщо жоден елемент не відповідає селектору, то метод поверне null.
-
-// const element = document.querySelector('div'); // Вибір першого <div> елемента
-// const elementWithClass = document.querySelector('.my-class'); // Вибір першого елемента з класом "my-class"
-// const elementWithId = document.querySelector('#my-id'); // Вибір першого елемента з ідентифікатором "my-id"
-
-// const nestedElement = document.querySelector('ul li'); // Вибір першого <li> елемента в <ul>
-
-// const complexElement = document.querySelector('div.my-class > p'); // Вибір першого <p> елемента, який є нащадком <div> елемента з класом "my-class"
