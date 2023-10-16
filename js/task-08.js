@@ -20,15 +20,21 @@
 
 const form = document.querySelector('.login-form');
 
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();//заборонити стандартну відправку форми
-    const form = event.target;// Отримуємо посилання на форму
-    const email = form.elements.email.value;// Отримуємо значення поля 'email'
-    const password = form.elements.password.value;// Отримуємо значення поля 'password'
-    
-    if (email === "" || password === "") {
-      alert('Всі поля повинні бути заповнені');
-    }
-    console.log(`email: ${email}, password: ${password}`);
-    form.reset();
-  });
+form.addEventListener('submit', function (event) {
+  event.preventDefault(); // Заборонити стандартну відправку форми
+  const form = event.target; // Отримуємо посилання на форму
+  const email = form.elements.email.value; // Отримуємо значення поля email
+  const password = form.elements.password.value; // Отримуємо значення поля password
+
+  if (email === "" || password === "") {
+    alert('Всі поля повинні бути заповнені');
+  }
+
+  const formData = {
+    email,
+    password
+  };
+
+  console.log(formData); 
+  form.reset(); // Очищаємо форму
+});

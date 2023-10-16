@@ -16,21 +16,12 @@
 // Category: Technologies
 // Elements: 5
 
-//* Кількість категорій в ul#categories
-const categoryList = document.querySelectorAll('ul#categories > li.item');
-// В результаті, в консолі будуть виведені наступні повідомлення.
-// Number of categories: 3
-console.log(`Number of categories: ${categoryList.length}`);
-//console.log('Number of categories: ' + countCategoriesList);
+const categoryList = document.getElementById('categories').children.length;
+console.log(`Number of categories: ${categoryList}`);
 
-categoryList.forEach((category) => {
- // Отримуємо текст заголовку тегу <h2> і зберігаємо його у змінну categoryName
- const categoryName = category.querySelector('h2').textContent;
+const categoryName = document.querySelectorAll('h2');
 
- // Отримуємо кількість усіх елементів <li>, що вкладені в поточну категорію, і зберігаємо її у змінну categoryElementsCount
- const categoryElementsCount = category.querySelectorAll('li').length;
-
-console.log(`Category: ${categoryName}`);
-console.log(`Number of categories: ${categoryElementsCount}`);
+categoryName.forEach((title) => {
+        console.log(`Category:`, title.textContent);
+        console.log(`Elements:`, title.nextElementSibling.children.length);
 });
-
