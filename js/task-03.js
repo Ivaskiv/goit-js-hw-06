@@ -18,8 +18,6 @@ const images = [
     alt: 'Group of Horses Running',
   },
 ];
-
-
 const galleryList = document.querySelector('ul.gallery');
 const listItemHTML = images.map((image) => 
         `<li>
@@ -27,8 +25,8 @@ const listItemHTML = images.map((image) =>
         </li>`).join('');
 galleryList.insertAdjacentHTML('beforeend', listItemHTML);
 
+//! ТЕОРІЯ
 // elem.insertAdjacentHTML(position, string);
-
 // Аргумент position - це рядок, позиція щодо елемента elem. Приймає одне з чотирьох значень.
 // "beforebegin" - перед elem
 // "afterbegin" - всередині elem, перед усіма дітьми

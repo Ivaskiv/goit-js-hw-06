@@ -35,16 +35,17 @@ const boxesArray = [];
 function createBoxes(amount) {
   const boxSize = 30;
   const step = 10;
-
-  const newBoxes = Array.from({ length: amount }).map((_, i) => {
+  box.innerHTML = '';
+ 
+  const newBoxes = Array.from({ length: amount }).map((element, index) => {
     const newBox = document.createElement('div');
-    newBox.style.width = `${boxSize+1 + (boxesArray.length + i) * step}px`;
-    newBox.style.height = `${boxSize+1 + (boxesArray.length + i) * step}px`;
+    newBox.style.width = `${boxSize + index * step}px`;
+    newBox.style.height = `${boxSize + index * step}px`;
     newBox.style.backgroundColor = getRandomHexColor();
     boxesArray.push(newBox);
     return newBox;
   });
-
+ //Array.from({ length: amount }) створює масив із amount пустих елементів, для цього використовується об'єкт { length: amount }. Потім використовується метод map(), який перебирає кожен елемент масиву, і для кожного елемента створюється новий блок <div>
   box.append(...newBoxes);
  }
 const destroyBoxes = () => {
@@ -56,19 +57,3 @@ createBtn.addEventListener('click', () => {
 });
 destroyBtn.addEventListener('click', destroyBoxes);
 
-
-
-
-//! ПЛАН
-// 1. Отримати посилання на елементи: input, кнопки "Create" (за допомогою атрибута data-create) та "Destroy" (за допомогою атрибута data-destroy), контейнер для створення елементів (div#boxes)
-// 2. Додати обробники подій для кнопок "Create" та "Destroy". 
-// 3. Реалізувати функцію createBoxes(amount):
-      //* Отримати посилання на контейнер для створення елементів (div#boxes)
-      //* Використати цикл для створення amount елементів <div>
-      //* Встановити для першого елемента розмір 30x30px
-      //* Встановити розмір кожного наступного елемента на 10px більше за попередній
-      //* Згенерувати випадковий колір фону для кожного елемента за допомогою функції getRandomHexColor
-      //* Додати створені елементи в контейнер для відображення на сторінці
-// 4. Реалізувати функцію destroyBoxes():
-      //* Отримати посилання на контейнер для створення елементів (div#boxes)
-      //* Очистити всі елементи в цьому контейнері, встановивши його вміст в порожній рядок
